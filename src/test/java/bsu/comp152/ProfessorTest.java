@@ -28,7 +28,9 @@ public class ProfessorTest {
         // make a test student and test professor
         testProf = new Professor(profName, deptName);
         mockStudent = mock(Student.class);
-        Student otherMockStudent = mock(Student.class);
+        when(mockStudent.getName()).thenReturn("Mock Student One");
+        otherMockStudent = mock(Student.class);
+        when(otherMockStudent.getName()).thenReturn("Mock Student Two");
 
     }
 
@@ -46,6 +48,21 @@ public class ProfessorTest {
     public void profToStringContainsDept(){
         assert (testProf.toString().contains(deptName));
     }
+
+    @Test
+    public void profToStringContainsOneAdviseeName() {
+        testProf.addAdvisee(mockStudent);
+        assert(testProf.toString().contains(mockStudent.getName()));
+    }
+
+    @Test
+    public void profToStringContainsTwoAdviseeNames() {
+        testProf.addAdvisee(mockStudent);
+        testProf.addAdvisee(otherMockStudent);
+        assert(testProf.toString().contains(mockStudent.getName()));
+        assert(testProf.toString().contains(otherMockStudent.getName()));
+    }
+
 
     @Test
     public void adviseeListIsInitiallyAnEmptyList() {

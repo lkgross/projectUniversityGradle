@@ -27,11 +27,10 @@ public class StudentTest {
         profName = "Professor Name";
         deptName = "Department Name";
         // Use a mock professor for testing independently of Professor class
-        // honestly this may not be necessary if the advisee list isn't a thing
         mockProf = mock(Professor.class);
-        when(mockProf.getName()).thenReturn(profName);
-        when(mockProf.toString()).thenReturn(profName+deptName);
         testStudent = new Student(studentName, mockProf, firstIDNumber);
+        when(mockProf.getName()).thenReturn(profName);
+        when(mockProf.toString()).thenReturn(profName+deptName+testStudent.getName());
     }
 
     @Test
